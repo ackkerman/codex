@@ -550,6 +550,9 @@ impl Session {
             Some(turn_context.sandbox_policy.clone()),
             Some(self.user_shell.clone()),
         )));
+        if let Some(item) = crate::csv_context::gather_csv_context(&turn_context.cwd) {
+            conversation_items.push(item);
+        }
         self.record_conversation_items(&conversation_items).await;
     }
 
